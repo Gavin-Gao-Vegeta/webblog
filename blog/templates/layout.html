@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <link rel=stylesheet type=text/css href="{{ url_for('static',
+filename='style.css') }}">
+  <title>My Wonderful Site</title>
+</head>
+
+<body>
+  <header id="bHeader">
+
+    <nav>
+      <div id="menu">
+        <div id="logo">
+          <p>CoolBlog</p>
+        </div>
+        <div id="menu-conent">
+          <ul id="menu-list-content">
+            <li id="home">
+              <a href="{{ url_for('home') }}" class="header">Home</a>
+            </li>
+            <li id="about">
+              <a href="{{ url_for('about') }}" class="header">About Us</a>
+            </li>
+          </ul>
+        </div>
+        <div id="user-center">
+          {% if current_user.is_authenticated %}
+          <p>Hello, {{ current_user.username }}!</p>
+          <div class="avatar">
+            <!-- <img src= alt=""> -->
+          </div>
+          <a href="{{ url_for('logout') }}">Logout</a>
+          {% else %}
+          <div>
+            <p>Hello, Guest!</p>
+          </div>
+          <ul>
+            <li>
+              <a href="{{ url_for('login') }}">Login</a>
+            </li>
+            <li>
+              <a href="{{ url_for('register') }}">Register</a>&nbsp
+            </li>
+          </ul>
+
+
+          {% endif %}
+        </div>
+      </div>
+
+
+
+      <div id="flashes">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ulclass=flashes>
+          {% for message in messages %}
+          <li>{{ message }}</li>
+          {% endfor %}
+          </ul>
+          {% endif %}
+          {% endwith %}
+      </div>
+    </nav>
+  </header>
+  <div class="content">
+    <aside id="user-information">123</aside>
+    <article>123</article>
+    <aside id="right-aside">123</aside>
+  </div>
+  <footer>123</footer>
+  <div id="content">
+    <!-- comments: <input type="text" placeholder="Please input some numbers"> -->
+    {% block content %}
+    {% endblock %}
+  </div>
+</body>
+
+</html>
