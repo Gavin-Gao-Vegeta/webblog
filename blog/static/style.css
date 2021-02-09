@@ -2,6 +2,14 @@
   margin: 0;
   padding: 0;
 }
+
+#flashes {
+  position: absolute;
+  top: 30%;
+  left: 0;
+  right: 0;
+}
+
 header {
   background-color: #ffe300;
   height: 56px;
@@ -13,19 +21,22 @@ header {
 }
 
 header a {
+
+  display: inline-block;
   color: #000000;
   margin: 0 auto;
   text-decoration: none;
   text-align: center;
 }
 
-ul li {
+li {
   display: inline-block;
   list-style-type: none;
-  margin: 0 10px;
   text-align: center;
+  padding: 0 10px;
   top: 18px;
 }
+
 
 nav {
   width: 1300px;
@@ -59,22 +70,149 @@ ul {
   margin: 0 auto;
   padding: 16px 0 0 0;
   display: flex;
-  flex-direction:row;
+  flex-direction: row;
   justify-content: space-between;
 }
-#user-information{
+
+#user-information {
   width: 200px;
   margin-right: 10px;
 }
-article{
+
+article {
   width: 600px;
 }
-#right-aside{
+
+#right-aside {
   width: 200px;
   margin-right: 10px;
 }
+
 footer {
-  background-color: #ffe300;
+  background-color: #282828;
   height: 200px;
   width: 100%;
+  color:#666
+}
+
+.hide {
+  display: none;
+}
+
+.auth-modal-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, .3);
+  z-index: 500;
+
+}
+
+#sub-title {
+  text-align: center;
+  font-size: 1.5rem;
+  margin: 0 0 2rem;
+}
+
+.login-form,
+.register-form {
+  display: flex;
+  position: absolute;
+  flex-direction: column;
+  padding: 2rem;
+  width: 26.5rem;
+  max-width: 100%;
+  font-size: 1.167rem;
+  background-color: #fff;
+  border-radius: 2px;
+  box-sizing: border-box;
+}
+
+#login-content,
+#register-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-form input,
+.register-form input {
+  width: 100%;
+  margin-bottom: .8rem;
+  border: 1px solid #e9e9e9;
+  border-radius: 2px;
+  padding: 10px;
+  outline: none;
+  box-sizing: border-box;
+  font-size: 1.067rem;
+}
+
+.login-form button,
+.register-form button {
+  width: 100%;
+  height: 3.334rem;
+  color: #fff;
+  background-color: #007fff;
+  border-radius: 2px;
+  outline: none;
+  box-sizing: border-box;
+  cursor: pointer;
+  margin-top: 5px;
+  border: none;
+  font-size: large;
+}
+
+input:focus {
+  border-color: #007fff;
+}
+
+.close-btn {
+  float: right;
+  cursor: pointer;
+  opacity: .4;
+}
+
+.close-btn:hover {
+  opacity: 1;
+}
+
+.ion-close-round::before {
+  content: "\2716";
+}
+
+i {
+  width: 5%;
+  font-style: italic;
+}
+
+.panfish #greeting,
+.panfish #normal {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 10rem;
+  z-index: 1;
+}
+
+.panfish #normal {
+  transform: translate(-50%, -83%);
+}
+
+.panfish #greeting {
+  transform: translate(-50%, -75.8%);
+}
+
+.panfish #blindfold {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 8.6rem;
+  transform: translate(-50%, -75%);
+  z-index: 1;
 }

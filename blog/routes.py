@@ -50,6 +50,7 @@ def login():
   form = LoginForm()
   if form.validate_on_submit():
     user = User.query.filter_by(email=form.email.data).first()
+    print(user)
     if user is not None and user.verify_password(form.password.data):
       login_user(user)
       flash('Login successful!')
@@ -63,4 +64,5 @@ def login():
 @app.route("/logout")
 def logout():
   logout_user()
+  flash('Logout successful!')
   return redirect(url_for('home'))

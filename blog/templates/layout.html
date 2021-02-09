@@ -19,30 +19,31 @@ filename='style.css') }}">
         <div id="menu-conent">
           <ul id="menu-list-content">
             <li id="home">
-              <a href="{{ url_for('home') }}" class="header">Home</a>
+              <a href="{{ url_for('home') }}" class="header-content">Home</a>
             </li>
             <li id="about">
-              <a href="{{ url_for('about') }}" class="header">About Us</a>
+              <a href="{{ url_for('about') }}" class="header-content">About Us</a>
             </li>
           </ul>
         </div>
         <div id="user-center">
           {% if current_user.is_authenticated %}
-          <p>Hello, {{ current_user.username }}!</p>
-          <div class="avatar">
-            <!-- <img src= alt=""> -->
-          </div>
-          <a href="{{ url_for('logout') }}">Logout</a>
+          <span>Hello, {{ current_user.username }}!</span>
+          <ul>
+            <li>
+              <a href="{{ url_for('logout') }}" class="header-content">Logout</a>
+            </li>
+          </ul>
           {% else %}
           <div>
             <p>Hello, Guest!</p>
           </div>
           <ul>
             <li>
-              <a href="{{ url_for('login') }}">Login</a>
+              <a href="{{ url_for('login') }}" class="header-content">Login</a>
             </li>
             <li>
-              <a href="{{ url_for('register') }}">Register</a>&nbsp
+              <a href="{{ url_for('register') }}" class="header-content">Register</a>&nbsp
             </li>
           </ul>
 
@@ -72,11 +73,12 @@ filename='style.css') }}">
     <aside id="right-aside">123</aside>
   </div>
   <footer>123</footer>
-  <div id="content">
+  <div id="content-form" class="hide">
     <!-- comments: <input type="text" placeholder="Please input some numbers"> -->
     {% block content %}
     {% endblock %}
   </div>
 </body>
+<script src="{{ url_for('static',filename='script.js') }}"></script>
 
 </html>

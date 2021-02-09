@@ -1,9 +1,23 @@
 {% extends "layout.html" %}
 {% block content %}
-<form method="POST" action="">
-  {{ form.csrf_token }}
-  {{ form.email.label }} {{ form.email }}
-  {{ form.password.label }} {{ form.password }}
-  <input type="submit" value="Login">
-</form>
+<div class="auth-modal-box">
+  <form method="POST" action="" class="login-form">
+    <div class="panfish"><img src="//sf6-scmcdn2-tos.pstatp.com/xitu_juejin_web/img/normal.0447fe9.png" id="normal"
+        style>
+      <img src="//sf6-scmcdn2-tos.pstatp.com/xitu_juejin_web/img/greeting.1415c1c.png" id="greeting"
+        style="display:none">
+      <img src="//sf6-scmcdn2-tos.pstatp.com/xitu_juejin_web/img/blindfold.58ce423.png" id="blindfold"
+        style="display:none"></div>
+    <i title="关闭" class="close-btn ion-close-round">
+    </i>
+    <div id='login-content'>
+      <p id='sub-title'>Login</p>
+      {{ form.csrf_token }}
+      <input type="text" placeholder="input your email" name="email" autocomplete="off" class="normal-style">
+      <input type="password" placeholder="input your password" name="password" autocomplete="off" class="blind-style">
+    </div>
+    <!-- <input type="submit" value="Login"> -->
+    <button type="submit" value="Login">Login</button>
+  </form>
+</div>
 {% endblock content %}
