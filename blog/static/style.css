@@ -2,17 +2,27 @@
   margin: 0;
   padding: 0;
 }
-
+html,
+body{
+  height: 100%;
+  width: 100%;
+  background: #f0f0f0;
+}
 #flashes {
   position: absolute;
   top: 30%;
   left: 0;
   right: 0;
 }
-
+@media screen and (max-width:1200px){
+  #body{
+    width: 1200px;
+  }
+}
 header {
   background-color: #ffe300;
   height: 56px;
+  width: 100%;
 }
 
 #logo {
@@ -37,9 +47,8 @@ li {
   top: 18px;
 }
 
-
-nav {
-  width: 1300px;
+#menu {
+  width: 80%;
   height: 56px;
   margin: 0 auto;
   text-align: center;
@@ -65,7 +74,6 @@ ul {
 }
 
 .content {
-  width: 1000px;
   min-height: 680px;
   margin: 0 auto;
   padding: 16px 0 0 0;
@@ -92,7 +100,7 @@ footer {
   background-color: #282828;
   height: 200px;
   width: 100%;
-  color:#666
+  color: #666
 }
 
 .hide {

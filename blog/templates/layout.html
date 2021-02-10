@@ -9,9 +9,8 @@ filename='style.css') }}">
 </head>
 
 <body>
-  <header id="bHeader">
-
-    <nav>
+  <div id="body">
+    <header id="bHeader">
       <div id="menu">
         <div id="logo">
           <p>CoolBlog</p>
@@ -65,18 +64,18 @@ filename='style.css') }}">
           {% endif %}
           {% endwith %}
       </div>
-    </nav>
-  </header>
-  <div class="content">
-    <aside id="user-information">123</aside>
-    <article>123</article>
-    <aside id="right-aside">123</aside>
-  </div>
-  <footer>123</footer>
-  <div id="content-form" class="hide">
-    <!-- comments: <input type="text" placeholder="Please input some numbers"> -->
-    {% block content %}
-    {% endblock %}
+    </header>
+    <div class="content">
+      <aside id="user-information">123</aside>
+      <article>123</article>
+      <aside id="right-aside">123</aside>
+    </div>
+    <footer>123</footer>
+    <div id="content-form" class="hide">
+      <!-- comments: <input type="text" placeholder="Please input some numbers"> -->
+      {% block content %}
+      {% endblock %}
+    </div>
   </div>
 </body>
 <script src="{{ url_for('static',filename='script.js') }}"></script>

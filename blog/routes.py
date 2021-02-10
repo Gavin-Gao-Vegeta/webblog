@@ -14,6 +14,10 @@ def home():
 def about():
   return render_template('about.html', title='About')
 
+@app.route("/add")
+def add():
+  return render_template('add.html')
+  
 @app.route("/post/<int:post_id>")
 def post(post_id):
   post = Post.query.get_or_404(post_id)
