@@ -23,6 +23,9 @@ filename='style.css') }}">
             <li id="about">
               <a href="{{ url_for('about') }}" class="header-content">About Us</a>
             </li>
+            <li id="add">
+              <a href="{{ url_for('add') }}" class="header-content">Write Post</a>
+            </li>
           </ul>
         </div>
         <div id="user-center">
@@ -56,26 +59,41 @@ filename='style.css') }}">
       <div id="flashes">
         {% with messages = get_flashed_messages() %}
         {% if messages %}
-        <ulclass=flashes>
+        <ul class=flashes>
           {% for message in messages %}
           <li>{{ message }}</li>
           {% endfor %}
-          </ul>
-          {% endif %}
-          {% endwith %}
+        </ul>
+        {% endif %}
+        {% endwith %}
       </div>
     </header>
     <div class="content">
-      <aside id="user-information">123</aside>
-      <article>123</article>
+      <aside id="user-information">
+        <h4>Search</h4>
+        <form method="GET" action="search">
+          <div>
+            <label for="quert">Name</label>
+            <input type="text" name="query" id="query">
+          </div>
+          <button type="submit">Search</button>
+        </form>
+      </aside>
+      <article>
+        {% for post in posts %}
+        <h1><a href="{{ url_for('post', post_id=post.id) }}">{{post.title}}</a></h1>
+        <p>"{{ post.content }}"</p>
+        <small>Date:{{ post.date }}</small><small>Like:{{post.like}}</small>
+        {% endfor %}
+        <div id="content-form" hidden>
+          <!-- comments: <input type="text" placeholder="Please input some numbers"> -->
+          {% block content %}
+          {% endblock %}
+        </div>
+      </article>
       <aside id="right-aside">123</aside>
     </div>
     <footer>123</footer>
-    <div id="content-form" class="hide">
-      <!-- comments: <input type="text" placeholder="Please input some numbers"> -->
-      {% block content %}
-      {% endblock %}
-    </div>
   </div>
 </body>
 <script src="{{ url_for('static',filename='script.js') }}"></script>

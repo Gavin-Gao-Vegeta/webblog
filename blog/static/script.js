@@ -58,3 +58,7 @@ if (flashContent.childElementCount > 0) {
     }
   }, 2000);
 }
+if (document.URL.match('post|login|register')) {
+  let postContent = document.getElementById('content-form')
+  postContent.removeAttribute('hidden')
+}

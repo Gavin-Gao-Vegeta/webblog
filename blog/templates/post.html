@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
 <img src="{{ url_for('static', filename='img/' + post.image_file) }}">
-<p>"{{ post.title }}" &nbsp Author: {{ post.user.username }}</p>
+<h1>{{ post.title }}</h1><small>Author: {{ post.user.username }}</small>
 <p>{{ post.content }}</p>
 
 {% for comment in comments %}

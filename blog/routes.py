@@ -14,13 +14,27 @@ def home():
 def about():
   return render_template('about.html', title='About')
 
-@app.route("/add")
+@app.route("/search")
+def search():
+  title = request.args.get('query')
+  search = "%{}".format(title)
+  posts=Post.query.filter(Post.title.like(search)).all()
+  return render_template('home.html', posts=posts)
+
+@app.route("/add",methods=['GET','POST'])
 def add():
+  if request.method == 'POST':
+    post = Post(title=request.form['title'],content=request.form['content'],author_id=request.form['author_id'])
+    db.session.add(post)
+    db.session.commit()
+    flash("Your post has been posted","success")
+    return redirect(url_for('home'))
   return render_template('add.html')
-  
+
 @app.route("/post/<int:post_id>")
 def post(post_id):
   post = Post.query.get_or_404(post_id)
+  print(post)
   comments = Comment.query.filter(Comment.post_id==post.id)
   form = CommentForm()
   return render_template('post.html',post=post,comments=comments,form=form)
