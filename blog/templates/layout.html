@@ -20,8 +20,11 @@ filename='style.css') }}">
             <li id="home">
               <a href="{{ url_for('home') }}" class="header-content">Home</a>
             </li>
+            <li id="all-post">
+              <a href="{{ url_for('allPosts') }}" class="header-content">All Posts</a>
+            </li>
             <li id="about">
-              <a href="{{ url_for('about') }}" class="header-content">About Us</a>
+              <a href="{{ url_for('about') }}" class="header-content">About Me</a>
             </li>
             <li id="add">
               <a href="{{ url_for('add') }}" class="header-content">Write Post</a>
@@ -32,6 +35,9 @@ filename='style.css') }}">
           {% if current_user.is_authenticated %}
           <span>Hello, {{ current_user.username }}!</span>
           <ul>
+            <li>
+              <a href="{{ url_for('tagList') }}" class="header-content">My Tag</a>
+            </li>
             <li>
               <a href="{{ url_for('logout') }}" class="header-content">Logout</a>
             </li>
@@ -71,7 +77,7 @@ filename='style.css') }}">
     <div class="content">
       <aside id="user-information">
         <h4>Search</h4>
-        <form method="GET" action="search">
+        <form method="GET" action="/search">
           <div>
             <label for="quert">Name</label>
             <input type="text" name="query" id="query">
@@ -80,12 +86,11 @@ filename='style.css') }}">
         </form>
       </aside>
       <article>
-        {% for post in posts %}
+        <!-- {% for post in posts %}
         <h1><a href="{{ url_for('post', post_id=post.id) }}">{{post.title}}</a></h1>
         <p>"{{ post.content }}"</p>
-        <small>Date:{{ post.date }}</small><small>Like:{{post.like}}</small>
-        {% endfor %}
-        <div id="content-form" hidden>
+        {% endfor %} -->
+        <div id="content-form">
           <!-- comments: <input type="text" placeholder="Please input some numbers"> -->
           {% block content %}
           {% endblock %}
@@ -95,6 +100,7 @@ filename='style.css') }}">
     </div>
     <footer>123</footer>
   </div>
+  <!-- <button aria-label="Send heart1 reaction to the presenter!" class="m-bf m-bg m-bh m-bi m-bj m-bk m-bl m-ai m-bm m-af m-bn m-bo m-bp m-bq m-br m-m m-d m-a m-o m-e m-f m-g m-h m-i r-box"></button> -->
 </body>
 <script src="{{ url_for('static',filename='script.js') }}"></script>
 

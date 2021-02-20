@@ -19,7 +19,7 @@ if (document.URL.match('login$|register$')) {
   cont.removeAttribute('class')
   let close = document.querySelector('.close-btn')
   close.addEventListener('click', () => {
-    document.location = 'home '
+    window.history.back()
   })
   let normalStyle = document.getElementsByClassName('normal-style');
   let blindStyle = document.getElementsByClassName('blind-style');
@@ -58,7 +58,19 @@ if (flashContent.childElementCount > 0) {
     }
   }, 2000);
 }
-if (document.URL.match('post|login|register')) {
+if (document.URL.match('post|login|register|about')) {
   let postContent = document.getElementById('content-form')
   postContent.removeAttribute('hidden')
+}
+let blogBtn = document.getElementsByClassName('blog-list')
+for (let i = 0; i < blogBtn.length; i++) {
+  // console.log(blogBtn[i].childNodes[1].childNodes[3].href)
+  blogBtn[i].addEventListener('click', (e) => {
+    window.location = blogBtn[i].childNodes[1].childNodes[3].href
+  })
+}
+
+if (document.URL.match('search')) {
+  let searchInput = document.getElementById('query')
+  searchInput.value = document.URL.slice(document.URL.indexOf('=') + 1)
 }

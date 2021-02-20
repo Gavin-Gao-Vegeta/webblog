@@ -1,18 +1,86 @@
 {% extends "layout.html" %}
 {% block content %}
+<p><small>Author: {{ post.user.username }}</small></p>
+<small>{{post.date}}</small>
 <img src="{{ url_for('static', filename='img/' + post.image_file) }}">
-<h1>{{ post.title }}</h1><small>Author: {{ post.user.username }}</small>
-<p>{{ post.content }}</p>
+<h1>{{ post.title }}</h1>
+{% if postLike %}
+{% for postlike in postLike %}
+{% if postlike.post_id == postId %}
+<form action="{{ url_for('unlike',post_id=post.id)}}" method="POST">
+  <button style="float: right;" type="submit">
+    <div class="icon-recommended"></div>
+  </button>
+</form>
+{% else %}
+<form action="{{ url_for('like',post_id=post.id)}}" method="POST">
+  <button style="float: right;" type="submit">
+    <div class="icon-recommend"></div>
+  </button>
+
+</form>
+{% endif %}
+{% endfor %}
+{% else %}
+<form action="{{ url_for('like',post_id=post.id)}}" method="POST">
+  <button style="float: right;" type="submit">
+    <div class="icon-recommend"></div>
+  </button>
+</form>
+{% endif %}
+
+{% if tagLists %}
+{% for tagList in tagLists %}
+{% if tagList.post_id == postId %}
+<form action="{{ url_for('untag',post_id=post.id)}}" method="POST">
+  <button style="float: right;" type="submit">
+    <div class="icon-tagged"></div>
+  </button>
+</form>
+{% else %}
+<form action="{{ url_for('tag',post_id=post.id)}}" method="POST">
+  <button style="float: right;" type="submit">
+    <div class="icon-tag"></div>
+  </button>
+
+</form>
+{% endif %}
+{% endfor %}
+{% else %}
+<form action="{{ url_for('tag',post_id=post.id)}}" method="POST">
+  <button style="float: right;" type="submit">
+    <div class="icon-tag"></div>
+  </button>
+</form>
+<!-- <form action="{{ url_for('tag',post_id=post.id)}}" method="POST">
+  <button style="float: right;" type="submit">
+    <div class="icon-tag"></div>
+  </button>
+</form> -->
+{% endif %}
+<h3 class="post-content">{{ post.content }}</h3>
 
 {% for comment in comments %}
-<p>"{{ comment.content }}"&nbsp<small>Author:{{ comment.user.username }}</small></p>
-{% endfor %}
-<form method="POST" action="{{ url_for('post_comment', post_id=post.id) }}">
-{{ form.hidden_tag() }}
-<div class="">
-{{ form.comment.label }} {{ form.comment }} {% for error in form.comment.errors %}<span style="color: red;">[{{ error }}]</span>
-{% endfor %}
+<div style="margin-bottom: 20px;">
+  <small>{{ comment.user.username }}</small>
+  <p style="font-size: large;margin: 10px 0;">{{ comment.content }}</p>
+  <small>{{ comment.date }}</small>
 </div>
-<div class="">{{ form.submit() }}</div>
+{% endfor %}
+{% if current_user.is_authenticated %}
+<form method="POST" action="{{ url_for('post_comment', post_id=post.id) }}">
+  {{ form.hidden_tag() }}
+  <div class="comment">
+    <p>Comment:</p>
+    <textarea class="form-control" name="comment" id="content" rows="5"
+      style="margin-top: 0px; margin-bottom: 0px; height: 232px;"></textarea>
+    {% for error in form.comment.errors %}<span style="color: red;">[{{ error }}]</span>
+    {% endfor %}
+  </div>
+  <button class="comment-submit" type="submit">Post comment</button>
 </form>
+{% else %}
+<p style="text-align: center;margin-top: 30px;">Please<a style="margin: 0 5px;"
+    href="{{ url_for('login') }}">Login</a>to leave comments</p>
+{% endif %}
 {% endblock content %}
