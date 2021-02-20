@@ -48,6 +48,11 @@ header {
   margin: 0 20px;
 }
 
+a {
+  text-decoration: none;
+  
+}
+
 header a {
 
   display: inline-block;
@@ -58,8 +63,12 @@ header a {
 }
 
 li {
-  display: inline-block;
   list-style-type: none;
+}
+
+#menu-list-content>li,
+#user-center>ul>li {
+  display: inline-block;
   text-align: center;
   padding: 0 10px;
   top: 18px;
@@ -358,4 +367,69 @@ textarea .form-control {
   background-repeat: no-repeat;
   background-size: 25px 25px;
   float: right;
+}
+
+#select-type {
+  width: 100%;
+  height: 3.5rem;
+}
+
+#nav-category {
+  position: relative;
+  line-height: 3.5rem;
+  background-color: #fff;
+  border-radius: 2px;
+  transition: all .2s;
+  transform: translateZ(0);
+  z-index: 0;
+}
+
+.nav-list {
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-item {
+  position: relative;
+  cursor: pointer;
+}
+
+.nav-item {
+  width: 25%;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-item a {
+  text-decoration: none;
+  color: #909090;
+}
+
+.active {
+  color: #007fff;
+}
+
+.nav-item>a:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.active:after {
+  content: "";
+  width: 3rem;
+  height: 3px;
+  border-radius: 2px;
+  background-color: #007fff;
+  position: absolute;
+  top: 75%;
+  left: 50%;
+  margin-left: -1.5rem;
 }

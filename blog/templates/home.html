@@ -1,5 +1,15 @@
 {% extends "layout.html" %}
 {% block content %}
+<div id="select-type">
+  <nav id="nav-category">
+    <div class="box">
+      <ul class="nav-list">
+        <li id="popular" class="nav-item router-link-exact-active route-active active"><a href="{{url_for('popular')}}">Popular</a></li>
+        <li id="newest" class="nav-item router-link-exact-active route-active"><a href="{{url_for('newest')}}">Newest</a></li>
+      </ul>
+    </div>
+  </nav>
+</div>
 {% for post in posts %}
 <div class="blog-list">
   <div class="blog-list-content">

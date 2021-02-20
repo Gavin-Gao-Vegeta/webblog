@@ -74,3 +74,14 @@ if (document.URL.match('search')) {
   let searchInput = document.getElementById('query')
   searchInput.value = document.URL.slice(document.URL.indexOf('=') + 1)
 }
+let newest = document.getElementById('newest')
+let popular = document.getElementById('popular')
+if (newest || popular) {
+  if (document.URL.match('newest')) {
+    newest.classList.add('active')
+    popular.classList.remove('active')
+  } else if (document.URL.match('newest|home|/')) {
+    newest.classList.remove('active')
+    popular.classList.add('active')
+  }
+}

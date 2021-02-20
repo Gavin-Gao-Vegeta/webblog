@@ -9,11 +9,17 @@ from urllib.parse import urlparse, urljoin
 @app.route("/")
 @app.route("/home")
 def home():
-  posts=Post.query.order_by(Post.date.desc()).limit(10).all()
-  for post in posts:
+  list = []
+  postLike = db.session.query(PostLike.post_id,func.count(1)).group_by(PostLike.post_id).order_by(func.count(1).desc())
+  for postL in postLike:
+    list.append(postL.post_id)
+  print(list)
+  posts=Post.query.filter(Post.id.in_(list)).all()
+  l = [next(s for s in posts if s.id == id) for id in list]
+  for post in l:
     count = PostLike.query.filter(PostLike.post_id==post.id).count()
     post.like = count
-  return render_template('home.html',posts=posts)
+  return render_template('home.html',posts=l)
 
 @app.route("/allPosts")
 def allPosts():
@@ -30,18 +36,49 @@ def about():
 @app.route("/ascending")
 def ascending():
   posts=Post.query.order_by(Post.date).all()
+  for post in posts:
+    count = PostLike.query.filter(PostLike.post_id==post.id).count()
+    post.like = count
   return render_template('allPosts.html',posts=posts)
 
 @app.route("/descending")
 def descending():
   posts=Post.query.order_by(Post.date.desc()).limit(10).all()
+  for post in posts:
+    count = PostLike.query.filter(PostLike.post_id==post.id).count()
+    post.like = count
   return render_template('allPosts.html',posts=posts)
+
+@app.route("/popular")
+def popular():
+  list = []
+  postLike = db.session.query(PostLike.post_id,func.count(1)).group_by(PostLike.post_id).order_by(func.count(1).desc())
+  for postL in postLike:
+    list.append(postL.post_id)
+  print(list)
+  posts=Post.query.filter(Post.id.in_(list)).all()
+  l = [next(s for s in posts if s.id == id) for id in list]
+  for post in l:
+    count = PostLike.query.filter(PostLike.post_id==post.id).count()
+    post.like = count
+  return render_template('home.html',posts=l)
+
+@app.route("/newest")
+def newest():
+  posts=Post.query.order_by(Post.date.desc()).limit(10).all()
+  for post in posts:
+    count = PostLike.query.filter(PostLike.post_id==post.id).count()
+    post.like = count
+  return render_template('home.html',posts=posts)
 
 @app.route("/search")
 def search():
   s = request.args.get('query')
   search = "%{}%".format(s)
-  posts=Post.query.filter(or_(Post.content.like(search),Post.title.like(search)))
+  posts=Post.query.order_by(Post.date.desc()).filter(or_(Post.content.like(search),Post.title.like(search)))
+  for post in posts:
+    count = PostLike.query.filter(PostLike.post_id==post.id).count()
+    post.like = count
   return render_template('home.html', posts=posts)
 
 @app.route("/add",methods=['GET','POST'])

@@ -34,7 +34,7 @@ filename='style.css') }}">
         <div id="user-center">
           {% if current_user.is_authenticated %}
           <span>Hello, {{ current_user.username }}!</span>
-          <ul>
+          <ul id="header-user">
             <li>
               <a href="{{ url_for('tagList') }}" class="header-content">My Tag</a>
             </li>
@@ -86,10 +86,6 @@ filename='style.css') }}">
         </form>
       </aside>
       <article>
-        <!-- {% for post in posts %}
-        <h1><a href="{{ url_for('post', post_id=post.id) }}">{{post.title}}</a></h1>
-        <p>"{{ post.content }}"</p>
-        {% endfor %} -->
         <div id="content-form">
           <!-- comments: <input type="text" placeholder="Please input some numbers"> -->
           {% block content %}
