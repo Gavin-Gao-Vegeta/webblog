@@ -4,8 +4,8 @@ from flask_login import LoginManager
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '653e3726979054fb94f323eec726295cab98de938d8db548'
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://c1993662:Yali1136!Yali1136!@csmysql.cs.cf.ac.uk:3306/c1993662_Blog'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:123456@127.0.0.1:3306/blog'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://c1993662:Yali1136!Yali1136!@csmysql.cs.cf.ac.uk:3306/c1993662_Blog'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:123456@127.0.0.1:3306/blog'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 app.config['WHOOSH_BASE']='whoosh'
 # app.config.from_object('config')
