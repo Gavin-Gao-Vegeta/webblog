@@ -21,14 +21,16 @@ filename='style.css') }}">
               <a href="{{ url_for('home') }}" class="header-content">Home</a>
             </li>
             <li id="all-post">
-              <a href="{{ url_for('allPosts') }}" class="header-content">All Posts</a>
+              <a href="{{ url_for('allPosts',sort=0) }}" class="header-content">All Posts</a>
             </li>
             <li id="about">
               <a href="{{ url_for('about') }}" class="header-content">About Me</a>
             </li>
+            {% if current_user.is_authenticated and current_user.id==1 %}
             <li id="add">
               <a href="{{ url_for('add') }}" class="header-content">Write Post</a>
             </li>
+            {% endif %}
           </ul>
         </div>
         <div id="user-center">
@@ -39,7 +41,7 @@ filename='style.css') }}">
               <a href="{{ url_for('tagList') }}" class="header-content">My Tag</a>
             </li>
             <li>
-              <a href="{{ url_for('logout') }}" class="header-content">Logout</a>
+              <a href="{{ url_for('logout',next=request.path) }}" class="header-content">Logout</a>
             </li>
           </ul>
           {% else %}
@@ -48,10 +50,10 @@ filename='style.css') }}">
           </div>
           <ul>
             <li>
-              <a href="{{ url_for('login') }}" class="header-content">Login</a>
+              <a href="{{ url_for('login',next=request.path) }}" class="header-content">Login</a>
             </li>
             <li>
-              <a href="{{ url_for('register') }}" class="header-content">Register</a>&nbsp
+              <a href="{{ url_for('register',next=request.path) }}" class="header-content">Register</a>&nbsp
             </li>
           </ul>
 
@@ -76,23 +78,40 @@ filename='style.css') }}">
     </header>
     <div class="content">
       <aside id="user-information">
-        <h4>Search</h4>
-        <form method="GET" action="/search">
-          <div>
-            <label for="quert">Name</label>
-            <input type="text" name="query" id="query">
-          </div>
-          <button type="submit">Search</button>
+        <h2>SearchKey word</h2>
+        <form method="GET" action="/search" id="search-form">
+          <input type="text" name="query" id="query">
+          <button id="search-btn" type="submit">Search</button>
         </form>
       </aside>
       <article>
         <div id="content-form">
-          <!-- comments: <input type="text" placeholder="Please input some numbers"> -->
+          
           {% block content %}
           {% endblock %}
         </div>
       </article>
-      <aside id="right-aside">123</aside>
+      <aside id="right-aside">
+        {% if discusses%}
+        <h2>Discussing</h2>
+        {% endif %}
+        {% for discuss in discusses %}
+        <div id="recently-discuss">
+          <div class="blog-list">
+            <div class="blog-list-content">
+              <p>{{discuss.title}}</p>
+              <a class="home_a" href="{{ url_for('post', post_id=discuss.id) }}">
+                <p>{{ discuss.content }}</p>
+              </a>
+              <small>Like:{{discuss.like}}</small>&nbsp<small>Comment:{{discuss.comment}}</small>
+            </div>
+
+            <img src="{{ url_for('static', filename='img/' + discuss.image_file) }}">
+
+          </div>
+        </div>
+        {% endfor %}
+      </aside>
     </div>
     <footer>123</footer>
   </div>

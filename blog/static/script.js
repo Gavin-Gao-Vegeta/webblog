@@ -9,7 +9,8 @@ for (let i = 0; i < li.length; i++) {
     e.target.style = ''
   })
 }
-if (document.URL.match('login$|register$')) {
+if (document.URL.match('login|register')) {
+  console.log(123)
   let body = document.querySelector('body')
   body.style = 'overflow:hidden'
   let normal = document.getElementById('normal')
@@ -17,10 +18,6 @@ if (document.URL.match('login$|register$')) {
   let blindfold = document.getElementById('blindfold')
   let cont = document.getElementById('content-form');
   cont.removeAttribute('class')
-  let close = document.querySelector('.close-btn')
-  close.addEventListener('click', () => {
-    window.history.back()
-  })
   let normalStyle = document.getElementsByClassName('normal-style');
   let blindStyle = document.getElementsByClassName('blind-style');
   for (let i = 0; i < normalStyle.length; i++) {

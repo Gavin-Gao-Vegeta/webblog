@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
-<div class="auth-modal-box">
+<div id="login-box">
   <form method="POST" action="" class="register-form">
     <div class="panfish"><img src="//sf6-scmcdn2-tos.pstatp.com/xitu_juejin_web/img/normal.0447fe9.png" id="normal"
         style>
@@ -8,25 +8,29 @@
         style="display:none">
       <img src="//sf6-scmcdn2-tos.pstatp.com/xitu_juejin_web/img/blindfold.58ce423.png" id="blindfold"
         style="display:none"></div>
-    <i title="关闭" class="close-btn ion-close-round">
-    </i>
     <div id="register-content">
       <p id='sub-title'>Register</p>
       {{ form.csrf_token }}
-      <input type="text" placeholder="input your username" name="username" autocomplete="off" class="normal-style">
+      <input type="text" placeholder="input your username" name="username" autocomplete="off" required class="normal-style">
       <!-- {{ form.username }} -->
       {% for error in form.username.errors %}<span style="color: red;">[{{ error }}]</span>{% endfor %}
       <!-- {{ form.email }} -->
-      <input type="text" placeholder="input your email" name="email" autocomplete="off" class="normal-style">
+      <input type="text" placeholder="input your first name" name="firstname" autocomplete="off" required class="normal-style">
+      {% for error in form.firstname.errors %}<span style="color: red;">[{{ error }}]</span>{% endfor %}
+      <input type="text" placeholder="input your last name" name="lastname" required autocomplete="off"
+        class="normal-style">
+      {% for error in form.lastname.errors %}<span style="color: red;">[{{ error }}]</span>{% endfor %}
+      <input type="text" placeholder="input your email" name="email" autocomplete="off" required class="normal-style">
       {% for error in form.email.errors %} <span style="color: red;">[{{ error }}]</span>{% endfor %}
       <!-- {{ form.password.label }}  -->
       <!-- {{ form.password }} -->
-      <input type="password" placeholder="input your password" name="password" autocomplete="off" class="blind-style">
+      <input type="password" placeholder="input your password" name="password" autocomplete="off" required
+        class="blind-style">
       {% for error in form.password.errors %}
       <span style="color: red;">[{{ error }}]</span>
       {% endfor %}
       <!-- {{ form.confirm_password.label }} {{ form.confirm_password }} -->
-      <input type="password" placeholder="confirm your password" name="confirm_password" autocomplete="off"
+      <input type="password" placeholder="confirm your password" name="confirm_password" autocomplete="off" required
         class="blind-style">
       {% for error in form.confirm_password.errors %}
       <span style="color: red;">[{{ error }}]</span>

@@ -2,8 +2,10 @@
 {% block content %}
 <p><small>Author: {{ post.user.username }}</small></p>
 <small>{{post.date}}</small>
-<img src="{{ url_for('static', filename='img/' + post.image_file) }}">
+<img style="width: 100%;" src="{{ url_for('static', filename='img/' + post.image_file) }}">
 <h1>{{ post.title }}</h1>
+{% if current_user.is_authenticated %}
+
 {% if postLike %}
 {% for postlike in postLike %}
 {% if postlike.post_id == postId %}
@@ -22,7 +24,7 @@
 {% endif %}
 {% endfor %}
 {% else %}
-<form action="{{ url_for('like',post_id=post.id)}}" method="POST">
+<form action="{{ url_for('like',post_id=post.id,next=request.path)}}" method="POST">
   <button style="float: right;" type="submit">
     <div class="icon-recommend"></div>
   </button>
@@ -47,7 +49,7 @@
 {% endif %}
 {% endfor %}
 {% else %}
-<form action="{{ url_for('tag',post_id=post.id)}}" method="POST">
+<form action="{{ url_for('tag',post_id=post.id,next=request.path)}}" method="POST">
   <button style="float: right;" type="submit">
     <div class="icon-tag"></div>
   </button>
@@ -57,6 +59,9 @@
     <div class="icon-tag"></div>
   </button>
 </form> -->
+{% endif %}
+{% else %}
+<span>Please <a style="margin: 0 5px;" href="{{ url_for('login',next=request.path) }}">Login</a> to like or tag</span>
 {% endif %}
 <h3 class="post-content">{{ post.content }}</h3>
 
@@ -80,7 +85,7 @@
   <button class="comment-submit" type="submit">Post comment</button>
 </form>
 {% else %}
-<p style="text-align: center;margin-top: 30px;">Please<a style="margin: 0 5px;"
-    href="{{ url_for('login') }}">Login</a>to leave comments</p>
+<p style="text-align: center;padding: 30px 0;">Please<a style="margin: 0 5px;"
+    href="{{ url_for('login',next=request.path) }}">Login</a>to leave comments</p>
 {% endif %}
 {% endblock content %}

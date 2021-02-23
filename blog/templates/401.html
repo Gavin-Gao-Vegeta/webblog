@@ -1,0 +1,8 @@
+{% extends "layout.html" %}
+{% block content %}
+  <h1>401 UNAUTHORIZED </h1>
+  <h3>if you want to access this resources,you need to <span><a style="font-size: large;" href="{{ url_for('login',next=request.path) }}">login</a></span> first.</h3>
+  <span><a style="font-size: large;" href="{{ url_for('home') }}">home</a></span>
+  
+  <span><a style="font-size: large;" href="{{ url_for('register',next=request.path) }}">register</a></span>
+{% endblock %}

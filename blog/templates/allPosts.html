@@ -1,14 +1,16 @@
 {% extends "layout.html" %}
+{%import 'pages.html' as pg%}
+{{pg.my_paginate(pagination,'allPosts')}}
 {% block content %}
 <div id="sort-by">
   <div id="ascending">
     <span>ascending date </span>
-    <a href="{{ url_for('ascending')}}">⏫</a>
+    <a href="{{ url_for('allPosts',sort=0)}}">⏫</a>
 
   </div>
   <div id="descending">
     <span>descending date</span>
-    <a href="{{ url_for('descending')}}">⏬</a>
+    <a href="{{ url_for('allPosts',sort=1)}}">⏬</a>
   </div>
 </div>
 {% for post in posts %}
@@ -18,11 +20,33 @@
     <a class="home_a" href="{{ url_for('post', post_id=post.id) }}">
       <h2>{{ post.title }}</h2>
     </a>
-    <small>Date:{{ post.date }}</small>&nbsp<small>Like:{{post.like}}</small>
+    <small>Date:{{ post.date }}</small>&nbsp<small>Like:{{post.like}}</small>&nbsp<small>Comment:{{post.comment}}</small>
   </div>
 
   <img src="{{ url_for('static', filename='img/' + post.image_file) }}">
 
 </div>
 {% endfor %}
+<div id="page-bottom">
+  page:{{ paginate.page }}
+  total page:{{ paginate.pages }}
+  content:{{ paginate.total }}
+  <br>
+
+    {% if paginate.has_prev %}
+    <a class="btn-nor" href="{{url_for('allPosts',sort=sort,page= paginate.prev_num )}}">&laquo;</a>
+    {% endif %}
+
+  {% for i in paginate.iter_pages() %}
+  {% if paginate.page == i %}
+  <a class="btn-dark" href="{{url_for('allPosts',sort=sort,page= i )}}">{{ i }}</a>
+  {% else %}
+  <a class="btn-nor" href="{{url_for('allPosts',sort=sort,page= i )}}">{{ i }}</a>
+  {% endif %}
+  {% endfor %}
+
+  {% if paginate.has_next %}
+  <a class="btn-nor" href="{{url_for('allPosts',sort=sort,page= paginate.next_num )}}">&raquo;</a>
+  {% endif %}
+</div>
 {% endblock content %}

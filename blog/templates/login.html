@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
-<div class="auth-modal-box">
+<div id="login-box">
   <form method="POST" action="" class="login-form">
     <div class="panfish"><img src="//sf6-scmcdn2-tos.pstatp.com/xitu_juejin_web/img/normal.0447fe9.png" id="normal"
         style>
@@ -8,14 +8,15 @@
         style="display:none">
       <img src="//sf6-scmcdn2-tos.pstatp.com/xitu_juejin_web/img/blindfold.58ce423.png" id="blindfold"
         style="display:none"></div>
-    <i title="关闭" class="close-btn ion-close-round">
-    </i>
     <div id='login-content'>
       <p id='sub-title'>Login</p>
       {{ form.csrf_token }}
-      <input type="text" placeholder="input your email" name="email" autocomplete="off" class="normal-style">
-      <input type="password" placeholder="input your password" name="password" autocomplete="off" class="blind-style">
-      <!-- <input name="href" autocomplete="off" id="hidden-href" hidden> -->
+      {% for error in form.email.errors %} <span style="color: red;">[{{ error }}]</span>{% endfor %}
+      <input type="text" placeholder="input your email" name="email" autocomplete="off" required class="normal-style">
+      {% for error in form.password.errors %}
+      <span style="color: red;">[{{ error }}]</span>
+      {% endfor %}
+      <input type="password" placeholder="input your password" name="password" autocomplete="off" required class="blind-style">
     </div>
     <!-- <input type="submit" value="Login"> -->
     <button type="submit" value="Login">Login</button>
